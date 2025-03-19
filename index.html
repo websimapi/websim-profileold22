@@ -1,0 +1,85 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creator Profile</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header id="profile-header">
+            <div class="profile-info">
+                <div id="avatar-container">
+                    <img id="avatar" src="" alt="Profile avatar">
+                </div>
+                <div class="profile-details">
+                    <h1 id="username"></h1>
+                    <p id="bio"></p>
+                    <div class="social-links">
+                        <span id="twitter-link"></span>
+                        <span id="discord-link"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <span class="stat-count" id="followers-count">0</span>
+                    <span class="stat-label">Followers</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-count" id="following-count">0</span>
+                    <span class="stat-label">Following</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-count" id="total-views">0</span>
+                    <span class="stat-label">Views</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-count" id="total-likes">0</span>
+                    <span class="stat-label">Likes</span>
+                </div>
+            </div>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab-button active" data-tab="projects">Projects</button>
+            <button class="tab-button" data-tab="followers">Followers</button>
+            <button class="tab-button" data-tab="following">Following</button>
+            <button class="tab-button" data-tab="likes">Likes</button>
+        </nav>
+
+        <main>
+            <section id="projects" class="tab-content active">
+                <div class="content-grid" id="projects-grid"></div>
+                <div class="loading-indicator" id="projects-loading">Loading more...</div>
+            </section>
+
+            <section id="followers" class="tab-content">
+                <div class="user-list" id="followers-list"></div>
+                <div class="loading-indicator" id="followers-loading">Loading more...</div>
+            </section>
+
+            <section id="following" class="tab-content">
+                <div class="user-list" id="following-list"></div>
+                <div class="loading-indicator" id="following-loading">Loading more...</div>
+            </section>
+
+            <section id="likes" class="tab-content">
+                <div class="content-grid" id="likes-grid"></div>
+                <div class="loading-indicator" id="likes-loading">Loading more...</div>
+            </section>
+        </main>
+    </div>
+
+    <script type="importmap">
+    {
+        "imports": {
+            "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+        }
+    }
+    </script>
+    <script src="config.js" type="module"></script>
+    <script src="app.js" type="module"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4c6229722a6346bc8eb5cb0e5eae5d41","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>

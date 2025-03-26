@@ -154,4 +154,11 @@ export function setupSlideshowInteractions() {
     
     showcaseGrid.addEventListener('mouseenter', stopSlideshow);
     showcaseGrid.addEventListener('mouseleave', startSlideshow);
+    
+    // Add event listeners to stop slideshow on interaction with iframe
+    showcaseGrid.addEventListener('click', function(e) {
+        if (e.target.tagName === 'IFRAME' || e.target.closest('.iframe-container')) {
+            stopSlideshow();
+        }
+    });
 }

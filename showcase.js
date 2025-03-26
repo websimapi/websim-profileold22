@@ -23,13 +23,14 @@ function createShowcaseItem(item, isActive = false) {
     showcaseItem.className = `showcase-item ${isActive ? 'active' : ''}`;
     
     showcaseItem.innerHTML = `
-        <a href="${item.url}" target="_blank">
-            <img class="showcase-image" src="${item.imageUrl}" alt="${item.title}">
-            <div class="showcase-info">
-                <h3 class="showcase-title">${item.title}</h3>
-                <p class="showcase-description">${item.description}</p>
-            </div>
-        </a>
+        <div class="iframe-container">
+            <iframe src="${item.frameUrl}" frameborder="0" loading="lazy" allowfullscreen></iframe>
+        </div>
+        <div class="showcase-info">
+            <h3 class="showcase-title">${item.title}</h3>
+            <p class="showcase-description">${item.description}</p>
+            <a href="${item.url}" target="_blank" class="visit-link">Visit Site</a>
+        </div>
     `;
     
     return showcaseItem;
@@ -84,7 +85,7 @@ export function initSlideshow() {
 // Start the slideshow timer
 function startSlideshow() {
     stopSlideshow(); // Clear any existing timer
-    slideshowState.timer = setInterval(nextSlide, CONFIG.ANIMATION_SPEED.cardFadeIn);
+    slideshowState.timer = setInterval(nextSlide, CONFIG.ANIMATION_SPEED.slideshow);
 }
 
 // Stop the slideshow timer

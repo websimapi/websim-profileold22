@@ -16,7 +16,7 @@ export const CONFIG = {
     ANIMATION_SPEED: {
         cardFadeIn: 300,
         tabSwitch: 200,
-        slideshow: 5000 // Time between slideshow transitions in milliseconds
+        slideshow: 8000 // Time between slideshow transitions in milliseconds
     },
     
     // Showcase items
@@ -25,25 +25,25 @@ export const CONFIG = {
             title: "Club Duckling",
             description: "Interactive experience",
             url: "https://club-duckling.on.websim.ai",
-            imageUrl: "https://images.websim.ai/v1/site/club-duckling.on.websim.ai/600"
+            frameUrl: "https://club-duckling.on.websim.ai"
         },
         {
             title: "Pogemon",
             description: "Gaming adventure",
             url: "https://pogemon.on.websim.ai",
-            imageUrl: "https://images.websim.ai/v1/site/pogemon.on.websim.ai/600"
+            frameUrl: "https://pogemon.on.websim.ai"
         },
         {
             title: "Webscape",
             description: "Digital landscape exploration",
             url: "https://webscape.on.websim.ai",
-            imageUrl: "https://images.websim.ai/v1/site/webscape.on.websim.ai/600"
+            frameUrl: "https://webscape.on.websim.ai"
         },
         {
             title: "The LLMs",
             description: "Language model showcase",
             url: "https://the-llms.on.websim.ai",
-            imageUrl: "https://images.websim.ai/v1/site/the-llms.on.websim.ai/600"
+            frameUrl: "https://the-llms.on.websim.ai"
         }
     ]
 };

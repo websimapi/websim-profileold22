@@ -16,7 +16,7 @@ export const CONFIG = {
     ANIMATION_SPEED: {
         cardFadeIn: 300,
         tabSwitch: 200,
-        slideshow: 8000 // Time between slideshow transitions in milliseconds
+        slideshow: 10000 // Increased time between slideshow transitions to 10 seconds
     },
     
     // Showcase items

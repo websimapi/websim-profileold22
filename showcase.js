@@ -25,6 +25,11 @@ function createShowcaseItem(item, isActive = false) {
     showcaseItem.innerHTML = `
         <div class="iframe-container">
             <iframe src="${item.frameUrl}" frameborder="0" loading="lazy" allowfullscreen></iframe>
+            <button class="fullscreen-button" title="Toggle fullscreen">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                </svg>
+            </button>
         </div>
         <div class="showcase-info">
             <h3 class="showcase-title">${item.title}</h3>
@@ -32,6 +37,20 @@ function createShowcaseItem(item, isActive = false) {
             <a href="${item.url}" target="_blank" class="visit-link">Visit Site</a>
         </div>
     `;
+    
+    // Add fullscreen functionality
+    const fullscreenButton = showcaseItem.querySelector('.fullscreen-button');
+    const iframe = showcaseItem.querySelector('iframe');
+    
+    fullscreenButton.addEventListener('click', () => {
+        if (document.fullscreenElement) {
+            document.exitFullscreen();
+        } else if (iframe) {
+            iframe.requestFullscreen().catch(err => {
+                console.error(`Error attempting to enable fullscreen: ${err.message}`);
+            });
+        }
+    });
     
     return showcaseItem;
 }
@@ -154,11 +173,4 @@ export function setupSlideshowInteractions() {
     
     showcaseGrid.addEventListener('mouseenter', stopSlideshow);
     showcaseGrid.addEventListener('mouseleave', startSlideshow);
-    
-    // Add event listeners to stop slideshow on interaction with iframe
-    showcaseGrid.addEventListener('click', function(e) {
-        if (e.target.tagName === 'IFRAME' || e.target.closest('.iframe-container')) {
-            stopSlideshow();
-        }
-    });
 }

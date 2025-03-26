@@ -24,6 +24,7 @@ body {
     padding: 30px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     margin-bottom: 24px;
+    margin-top: 20px;
 }
 
 .profile-info {
@@ -261,9 +262,10 @@ body {
     background-color: white;
     border-radius: 12px;
     padding: 30px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
     margin-bottom: 24px;
     position: relative;
+    margin-top: -20px;
 }
 
 .showcase-header {
@@ -274,15 +276,17 @@ body {
 }
 
 .showcase-header h2 {
-    font-size: 24px;
+    font-size: 28px;
     color: #222;
+    font-weight: 700;
 }
 
 .showcase-grid {
     position: relative;
-    height: 550px;
+    height: 650px;
     margin-bottom: 16px;
     overflow: hidden;
+    border-radius: 8px;
 }
 
 .showcase-item {
@@ -397,6 +401,33 @@ body {
 
 .slideshow-control.next {
     right: 10px;
+}
+
+.fullscreen-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.7);
+    border: none;
+    border-radius: 4px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.fullscreen-button:hover {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.fullscreen-button svg {
+    width: 20px;
+    height: 20px;
+    fill: #333;
 }
 
 /* Loading Indicator */

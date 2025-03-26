@@ -123,19 +123,28 @@ function goToSlide(index) {
     
     // Apply transition effect
     const currentSlide = showcaseGrid.querySelector('.showcase-item');
-    currentSlide.style.opacity = '0';
-    
-    setTimeout(() => {
-        // Remove old slide and add new one
-        showcaseGrid.removeChild(currentSlide);
-        showcaseGrid.insertBefore(newSlide, showcaseGrid.firstChild);
+    if (currentSlide) {
+        currentSlide.style.opacity = '0';
         
-        // Update state
+        setTimeout(() => {
+            // Remove old slide and add new one
+            if (currentSlide.parentNode === showcaseGrid) {
+                showcaseGrid.removeChild(currentSlide);
+            }
+            showcaseGrid.insertBefore(newSlide, showcaseGrid.firstChild);
+            
+            // Update state
+            slideshowState.currentIndex = index;
+            
+            // Reset timer
+            startSlideshow();
+        }, 300); // Match the CSS transition duration
+    } else {
+        // If there's no current slide, just add the new one
+        showcaseGrid.appendChild(newSlide);
         slideshowState.currentIndex = index;
-        
-        // Reset timer
         startSlideshow();
-    }, 300); // Match the CSS transition duration
+    }
 }
 
 // Pause slideshow when user hovers over it

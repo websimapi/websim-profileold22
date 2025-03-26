@@ -22,7 +22,8 @@ const state = {
         followers: true,
         following: true,
         likes: true
-    }
+    },
+    scrollListeners: {}
 };
 
 // API functions
@@ -96,7 +97,7 @@ async function loadProjects() {
         }
         
         const response = await fetch(url);
-        if (!response.ok) throw new Error('Failed to fetch projects');
+        if (!response.ok) throw new Error(`Failed to fetch projects: ${response.status}`);
         
         const data = await response.json();
         renderProjects(data.projects.data);
@@ -104,8 +105,13 @@ async function loadProjects() {
         // Update cursor and has more state
         state.cursors.projects = data.projects.meta.end_cursor;
         state.hasMore.projects = data.projects.meta.has_next_page;
+        
+        if (!state.hasMore.projects) {
+            document.getElementById('projects-loading').textContent = 'No more projects to load';
+        }
     } catch (error) {
         console.error('Error loading projects:', error);
+        document.getElementById('projects-loading').textContent = 'Error loading projects. Try again.';
     } finally {
         state.loading.projects = false;
         updateLoadingState('projects');
@@ -360,6 +366,30 @@ function renderLikes(likes) {
     });
 }
 
+function renderShowcase() {
+    const showcaseGrid = document.getElementById('showcase-grid');
+    if (!showcaseGrid) return;
+    
+    showcaseGrid.innerHTML = '';
+    
+    CONFIG.SHOWCASE_ITEMS.forEach(item => {
+        const showcaseItem = document.createElement('div');
+        showcaseItem.className = 'showcase-item';
+        
+        showcaseItem.innerHTML = `
+            <a href="${item.url}" target="_blank">
+                <img class="showcase-image" src="${item.imageUrl}" alt="${item.title}">
+                <div class="showcase-info">
+                    <h3 class="showcase-title">${item.title}</h3>
+                    <p class="showcase-description">${item.description}</p>
+                </div>
+            </a>
+        `;
+        
+        showcaseGrid.appendChild(showcaseItem);
+    });
+}
+
 function updateLoadingState(type) {
     const loadingElement = document.getElementById(`${type}-loading`);
     
@@ -421,29 +451,57 @@ function initTabs() {
     });
 }
 
-// Infinite scrolling
+// Improved infinite scrolling with debounce and better threshold calculation
 function initInfiniteScroll() {
-    window.addEventListener('scroll', () => {
+    const debounce = (func, delay) => {
+        let timeout;
+        return function() {
+            const context = this;
+            const args = arguments;
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(context, args), delay);
+        };
+    };
+    
+    const scrollHandler = debounce(() => {
         if (!state.loading[state.activeTab] && state.hasMore[state.activeTab]) {
             const scrollY = window.scrollY;
             const visibleHeight = document.documentElement.clientHeight;
             const pageHeight = document.documentElement.scrollHeight;
-            const bottomOfPage = scrollY + visibleHeight >= pageHeight - CONFIG.INFINITE_SCROLL_THRESHOLD;
+            const scrollPercentage = (scrollY + visibleHeight) / pageHeight;
             
-            if (bottomOfPage) {
+            // Load more when user scrolls past 75% of the page or is close to bottom
+            if (scrollPercentage > 0.75 || 
+                (pageHeight - (scrollY + visibleHeight)) < CONFIG.INFINITE_SCROLL_THRESHOLD) {
                 loadTabData(state.activeTab);
             }
         }
-    });
+    }, 100);
+
+    window.addEventListener('scroll', scrollHandler);
+    state.scrollListeners.main = scrollHandler;
+    
+    // Also check on window resize
+    window.addEventListener('resize', scrollHandler);
 }
 
 // Initialize the app
 async function initApp() {
     await fetchCreator();
+    renderShowcase();
     initTabs();
     initInfiniteScroll();
+    
+    // Check if we need to load immediately (for small pages)
+    setTimeout(() => {
+        const visibleHeight = document.documentElement.clientHeight;
+        const pageHeight = document.documentElement.scrollHeight;
+        
+        if (pageHeight <= visibleHeight && state.hasMore[state.activeTab]) {
+            loadTabData(state.activeTab);
+        }
+    }, 100);
 }
 
 // Start the app
 document.addEventListener('DOMContentLoaded', initApp);
-

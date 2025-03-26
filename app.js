@@ -1,4 +1,5 @@
 import { CONFIG } from './config.js';
+import { initSlideshow, setupSlideshowInteractions } from './showcase.js';
 
 // State management
 const state = {
@@ -366,30 +367,6 @@ function renderLikes(likes) {
     });
 }
 
-function renderShowcase() {
-    const showcaseGrid = document.getElementById('showcase-grid');
-    if (!showcaseGrid) return;
-    
-    showcaseGrid.innerHTML = '';
-    
-    CONFIG.SHOWCASE_ITEMS.forEach(item => {
-        const showcaseItem = document.createElement('div');
-        showcaseItem.className = 'showcase-item';
-        
-        showcaseItem.innerHTML = `
-            <a href="${item.url}" target="_blank">
-                <img class="showcase-image" src="${item.imageUrl}" alt="${item.title}">
-                <div class="showcase-info">
-                    <h3 class="showcase-title">${item.title}</h3>
-                    <p class="showcase-description">${item.description}</p>
-                </div>
-            </a>
-        `;
-        
-        showcaseGrid.appendChild(showcaseItem);
-    });
-}
-
 function updateLoadingState(type) {
     const loadingElement = document.getElementById(`${type}-loading`);
     
@@ -488,7 +465,8 @@ function initInfiniteScroll() {
 // Initialize the app
 async function initApp() {
     await fetchCreator();
-    renderShowcase();
+    initSlideshow();
+    setupSlideshowInteractions();
     initTabs();
     initInfiniteScroll();
     

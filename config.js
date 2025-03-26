@@ -15,22 +15,35 @@ export const CONFIG = {
     // Animation speeds
     ANIMATION_SPEED: {
         cardFadeIn: 300,
-        tabSwitch: 200
+        tabSwitch: 200,
+        slideshow: 5000 // Time between slideshow transitions in milliseconds
     },
     
     // Showcase items
     SHOWCASE_ITEMS: [
         {
-            title: "Featured Project 1",
-            description: "An amazing interactive experience",
-            url: "https://websim.ai/c/G2K9DFGHJ1K2M3N4O5",
-            imageUrl: "https://images.websim.ai/v1/site/G2K9DFGHJ1K2M3N4O5/600"
+            title: "Club Duckling",
+            description: "Interactive experience",
+            url: "https://club-duckling.on.websim.ai",
+            imageUrl: "https://images.websim.ai/v1/site/club-duckling.on.websim.ai/600"
         },
         {
-            title: "Featured Project 2",
-            description: "My best work yet",
-            url: "https://websim.ai/c/Q7R8S9T1U2V3W4X5Y6",
-            imageUrl: "https://images.websim.ai/v1/site/Q7R8S9T1U2V3W4X5Y6/600"
+            title: "Pogemon",
+            description: "Gaming adventure",
+            url: "https://pogemon.on.websim.ai",
+            imageUrl: "https://images.websim.ai/v1/site/pogemon.on.websim.ai/600"
+        },
+        {
+            title: "Webscape",
+            description: "Digital landscape exploration",
+            url: "https://webscape.on.websim.ai",
+            imageUrl: "https://images.websim.ai/v1/site/webscape.on.websim.ai/600"
+        },
+        {
+            title: "The LLMs",
+            description: "Language model showcase",
+            url: "https://the-llms.on.websim.ai",
+            imageUrl: "https://images.websim.ai/v1/site/the-llms.on.websim.ai/600"
         }
     ]
 };
